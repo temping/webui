@@ -4,13 +4,18 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'sizzle'
 import dayjs from 'dayjs'
+import { hasPrevValue, findPrevValue, partition, unpartition } from './utils/functions';
+import { CALENDAR_TYPE_HELPER } from './DatePickerHelepr';
+
 
 export default function DatePicker(selector, option) {
   const [el] = $(selector)
+
   class DatePickerRoot extends React.Component {
     constructor (props){
       super(props)
       this.state = {
+        activeCalendars: ["month", "date", "hour"],
         focusCalendar: "date",
         focusYear:dayjs().year(),
         focusMonth:dayjs().month()+1,
@@ -40,7 +45,7 @@ export default function DatePicker(selector, option) {
           <pre>{JSON.stringify(state, 2, 2)}</pre>
           <DatePickerInput state={rootProps}/>
           <div className="root">
-            { state.focusCalendar === "date" && <DatePickerDateCalendar state={rootProps}/>}
+            <DatePickerDateCalendar state={rootProps}/>
           </div>
         </>
       );
@@ -56,21 +61,80 @@ function DatePickerInput (){
   )
 }
 
-function DatePickerDateCalendar (props) {
+function DatePickerCalendarHeader (props){
   const { state } = props
-  const { focusYear, focusMonth, patchState } = state
+  const { focusYear, focusMonth, activeCalendars, focusCalendar, patchState } = state
+
+  // arrow left
+  function handlePrev (){
+    const { keyOfArrowValue } = CALENDAR_TYPE_HELPER[focusCalendar]
+    patchState({ [keyOfArrowValue]: state[keyOfArrowValue]-1 })
+  }
+
+  // arrow right
+  function handleNext (){
+    const { keyOfArrowValue } = CALENDAR_TYPE_HELPER[focusCalendar]
+    patchState({ [keyOfArrowValue]: state[keyOfArrowValue]+1 })
+  }
+
+  // upper calendar
+  function handleUpperCalendar (){
+    console.log("hasPrevValue(activeCalendars, focusCalendar)", hasPrevValue(activeCalendars, focusCalendar), { activeCalendars, focusCalendar })
+    if(!hasPrevValue(activeCalendars, focusCalendar)){
+      return
+    }
+    const upperCalendarType = findPrevValue(activeCalendars, focusCalendar)
+    patchState({ focusCalendar: upperCalendarType })
+  }
+
+  const headerFocusDateLabel = (()=>{
+    switch(focusCalendar){
+      case "month":
+        return `${focusYear}년`
+      case "date":
+        default:
+          return `${focusYear}년 ${focusMonth}월`
+    }
+  })()
 
   return (
     <div>
+      <button onClick={handlePrev}>&lt;</button>
+      <span onClick={handleUpperCalendar}>{headerFocusDateLabel}</span>
+      <button onClick={handleNext}>&gt;</button>
+    </div>
+  )
+}
+
+function DatePickerDateCalendar (props) {
+  const { state: { focusCalendar } } = props
+  return (
+    <div>
+      <DatePickerCalendarHeader {...props}/>
       <div>
-        <button onClick={()=>patchState({ focusMonth: focusMonth-1 })}>&lt;</button>
-        <span>{focusYear}년 {focusMonth}월</span>
-        <button onClick={()=>patchState({ focusMonth: focusMonth+1 })}>&gt;</button>
-      </div>
-      <div>
-        <DatePickerDaysTable />
+        { focusCalendar === 'month' && (
+          <DatePickerMonthsTable />
+        )}
+        { focusCalendar === 'date' && (
+          <DatePickerDaysTable />
+        )}
       </div>
     </div>
+  )
+}
+
+function DatePickerMonthsTable (props){
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <td>1월</td>
+          <td>2월</td>
+          <td>3월</td>
+          <td>4월</td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 

@@ -4,9 +4,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'sizzle'
 import dayjs from 'dayjs'
-import { hasPrevValue, findPrevValue, partition, unpartition } from './utils/functions';
+import { hasPrevValue, findPrevValue, partition } from './utils';
 import { CALENDAR_TYPE_HELPER } from './DatePickerHelepr';
-
 
 export default function DatePicker(selector, option) {
   const [el] = $(selector)
@@ -55,10 +54,13 @@ export default function DatePicker(selector, option) {
   ReactDOM.render(<DatePickerRoot />, el);
 }
 
-function DatePickerInput (){
-  return (
-    <input type="text" />
-  )
+function DatePickerInput (props){
+  const { state: { selected } } = props
+  if(selected instanceof Date){
+    return <input type="text" value={dayjs(selected).format("YYYY-MM-DD")}/>
+  } else {
+    return <input type="text" value=""/>
+  }
 }
 
 function DatePickerCalendarHeader (props){
@@ -113,10 +115,10 @@ function DatePickerDateCalendar (props) {
       <DatePickerCalendarHeader {...props}/>
       <div>
         { focusCalendar === 'month' && (
-          <DatePickerMonthsTable />
+          <DatePickerMonthsTable {...props}/>
         )}
         { focusCalendar === 'date' && (
-          <DatePickerDaysTable />
+          <DatePickerDaysTable {...props}/>
         )}
       </div>
     </div>
@@ -124,42 +126,62 @@ function DatePickerDateCalendar (props) {
 }
 
 function DatePickerMonthsTable (props){
+  const { state: { patchState, focusMonth, focusCalendar } } = props
+  const monthes = partition(Array.from({ length:12 }).map((d,index)=>({
+    month: index + 1,
+    label:`${index+1}월`
+  })), 4)
   return (
     <table>
       <tbody>
-        <tr>
-          <td>1월</td>
-          <td>2월</td>
-          <td>3월</td>
-          <td>4월</td>
-        </tr>
+        {monthes.map((cols, rowIndex)=>(
+          <tr key={`date-row-${rowIndex}`}>
+            {cols.map((col, colIndex)=>(
+              <td 
+                key={`date-row-${rowIndex}-${colIndex}`}
+                onClick={()=>patchState({ focusMonth: col.month, focusCalendar:"date" })}
+              >
+                {col.label}
+              </td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   )
 }
 
 function DatePickerDaysTable (props){
+  const { state: { patchState, focusYear, focusMonth } } = props
+  const focusDay = dayjs(`${focusYear}-${focusMonth}`)
+
+  const lastDate = focusDay.endOf("month").date()
+  
+  const focusDates = Array.from({ length:lastDate }).map((d,index)=>{
+    const current = focusDay.date(index+1).startOf('date')
+    return {
+      label:current.date(),
+      current
+    }
+  })
+
+  const eachDates = partition(focusDates, 7)
+  
   return (
     <table>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        {eachDates.map((cols, rowIndex)=>(
+          <tr key={`date-row-${rowIndex}`}>
+            {cols.map((col, colIndex)=>(
+              <td 
+                key={`date-col-${rowIndex}-${colIndex}`}
+                onClick={()=>{ patchState({ selected:col.current.toDate() }) }}
+              >
+                {col && col.label}
+              </td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   )

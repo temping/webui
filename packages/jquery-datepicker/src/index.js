@@ -1,5 +1,7 @@
 import $ from 'jquery'
 import moment from 'moment'
+import { partition } from './utils'
+
 $.fn.extend({
     datedatepicker: function(options){
         var container = this.eq(0);
@@ -36,6 +38,51 @@ $.fn.extend({
             })()
             $(".title").html(titleText)
 
+            var currentMonth = moment(year+"-"+month,"Y-M");
+            var firstDate = 1;
+            var lastDate = currentMonth.clone().endOf("month").date();
+
+            console.log({ currentMonth, lastDate })
+            
+            
+            // 1일 마지막 날까지 구함
+            var dates = []
+            for(var i=firstDate; i<=lastDate; i++) {
+                var current = currentMonth.clone().date(i)
+                dates.push({
+                    day: current.day(),
+                    date: current.date(),
+                    format: current.format("YYYY/MM/DD")
+                });
+            }
+
+            // 7일씩 나눔
+            var partitionDate = partition(dates, 7)
+            
+            console.log({
+                dates,
+                partitionDate
+            })
+
+            // tr 엘리먼트
+            var trs = partitionDate.map(function(trData){
+                var tr = $("<tr/>")
+
+                trData.forEach(function (current){
+                    if(!current){
+                        current = {}
+                    }
+                    $("<td/>")
+                    .text(current.date)
+                    .attr("data-date", current.format)
+                    .appendTo(tr)
+                })
+                
+                return tr
+            })
+
+            //trs 를 tbody에 넣음
+            $('.date_contents tbody').empty().append(trs)
         }
 
         $('.prev').on('click',  function(){

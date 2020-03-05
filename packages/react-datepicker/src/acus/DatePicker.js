@@ -157,7 +157,7 @@ function DatePickerDaysTable (props){
 
   const lastDate = focusDay.endOf("month").date()
   
-  const focusDates = Array.from({ length:lastDate }).map((d,index)=>{
+  const focusCurrentMonthDates = Array.from({ length:lastDate }).map((d,index)=>{
     const current = focusDay.date(index+1).startOf('date')
     return {
       label:current.date(),
@@ -165,7 +165,9 @@ function DatePickerDaysTable (props){
     }
   })
 
-  const eachDates = partition(focusDates, 7)
+  const beforeMonthDates = []
+
+  const eachDates = partition(focusCurrentMonthDates, 7)
   
   return (
     <table>

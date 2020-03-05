@@ -74,6 +74,22 @@ export const partition = (data, want)=>{
   return []
 }
 
+// rotateValue([1,2,3], 1) // [2,3,1]
+// rotateValue([1,2,3], 3) // [1,2,3]
+// rotateValue([1,2,3], 0) // [1,2,3]
+// rotateValue([1,2,3], -1) // [3,1,2]
+export const rotateValue = (rotateValue, step = 1) => {
+  const rotateValues = toArray(rotateValue)
+  const rotateLength = rotateValues.length
+  const rotateStep = (step * -1) % rotateLength
+  if(rotateStep === 0) return rotateValues
+  const startIndex = rotateStep < 0 ? rotateLength + step : step
+  return [
+    ...rotateValues.slice(0, startIndex),
+    ...rotateValues.slice(startIndex)
+  ]
+}
+
 export const toggleValue = (toggleValues, currentValue, step = 1) => {
   return (
     (toggleValues = asArray(toggleValues)) &&

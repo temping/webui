@@ -2,6 +2,18 @@ import $ from 'jquery'
 import moment from 'moment'
 import { partition } from './utils'
 
+function test01() {
+    var array = []
+    var reverseArray = []
+
+    for ( var i = 0, l= 100; i<l; i++ ) {
+        array.push(i+1)
+        reverseArray.unshift(i+1)
+    }
+    // console.log(i, array, reverseArray, array.reverse())
+}
+test01();
+
 $.fn.extend({
     datedatepicker: function(options){
         var container = this.eq(0);

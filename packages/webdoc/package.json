@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "showdown": "^1.9.1",
     "vue": "^3.0.0-alpha.9",
     "vue-router": "^4.0.0-alpha.3"
   },

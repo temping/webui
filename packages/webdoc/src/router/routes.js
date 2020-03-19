@@ -7,21 +7,33 @@ export default [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      title: "Home"
+    }
   },
   {
     path: "/html",
     name: "html",
-    component: Html
+    component: Html,
+    meta: {
+      title: "HTML"
+    }
   },
   {
     path: "/css",
     name: "CSS",
-    component: Css
+    component: Css,
+    meta: {
+      title: "CSS"
+    }
   },
   {
     path: "/accessibility",
     name: "Accessibility",
-    component: Accessibility
+    component: Accessibility,
+    meta: {
+      title: "Accessibility"
+    }
   }
 ]

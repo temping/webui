@@ -1,15 +1,27 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/html">html</router-link> |
-      <router-link to="/css">CSS</router-link> |
-      <router-link to="/accessibility">Accessibility</router-link>
+      <template v-for="(item, index) in menu">
+        <span :key="`route-${index}-div`" v-if="index !== 0">&nbsp;|&nbsp;</span>
+        <router-link :key="`route-${index}`" :to="item.path">
+          {{ item.meta?.title || name }}
+        </router-link>
+      </template>
     </div>
     <router-view />
   </div>
 </template>
-
+<script>
+import routes from '@/router/routes'
+export default {
+  setup() {
+    const menu = routes.map(({ name, path, meta }) => ({ name, path, meta }));
+    return {
+      menu
+    };
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

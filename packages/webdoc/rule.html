@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {font-size: 16px; padding: 10px 50px 50px;}
+        h2 {font-size: 20px;}
+        h3 {padding: 0px 0px 0px 20px; border-left: 2px solid rgba(0,0,0,0.6); font-size: 22px; font-weight: normal;}
+        h4 {font-size: 20px;}
+        h5, h6 {font-weight: normal;}
+
+        p {margin: 0px; line-height: 26px;}
+        em {font-style: normal; font-weight: bold;}
+
+        hr {margin: 50px 0px 0px 0px;}
+        xmp {margin: 0px 0px 0px -290px; padding: 0px;}
+
+        section + section {margin: 50px 0px 0px 0px;}
+        
+        ul > li {margin: 40px 0px 0px 0px;}
+        ul > li > h4 {font-size: 20px; margin: 30px 0px 30px 0px; font-weight: normal;}
+        
+        dl {border-radius: 10px; box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.5);}
+        dl + dl {margin: 10px 0px 0px 0px;}
+        dl > dt {display: block; padding: 10px 40px; border-radius: 10px 10px 0px 0px; font-size: 18px; background-color: rgba(245,218,189,1);}
+        dl .dt_only {border-radius: 10px;}
+        dl > dd {overflow: hidden; margin: 0px; padding: 0px 0px 10px 20px; border-radius: 0px 0px 10px 10px;}
+        dl > dd:empty {padding: 0px 0px 0px 0px;}
+        dl > dd > div {margin: 20px 40px; border-radius: 10px;}
+        dl > dd h5 {font-size: 16px; margin: 20px 0px 4px;}
+        dl > dd ul > li {margin: 0px; list-style: disc;}
+        dl > dd ul > .list_style_none {list-style: none;}
+
+        button {padding: 10px 20px; border-radius: 5px; background-color: rgba(0,0,0,0.1); cursor: pointer;}
+        button:enabled {cursor: pointer;}
+        button:disabled {opacity: 0.8; cursor: initial;}
+
+        input[type="radio"] {width: 20px; height: 20px; vertical-align: middle; background-color: #fff;}
+        input[type="radio"]:checked {outline: 1px dashed red;}
+        label {vertical-align: middle;}
+
+        .hide {display: none !important;}
+
+        .import > div {display: inline-block; padding: 0px 20px 10px; vertical-align: top; border-radius: 10px; border: 1px dashed #000;}
+
+        .reference > h2 {font-size: 28px;}
+
+        .example {margin-top: 15px; padding: 15px 0px 0px 0px; border-top: 1px dashed rgba(0,0,0,0.6);}
+        .example .ul ul {display: inline-block; width: 310px; margin: 20px 0px 0px 0px;}
+        .example .ul ul > li {margin: 0px;}
+        .example .ol ol {display: inline-block; width: 310px; margin: 20px 0px 0px 0px;}
+        .example .ol ol > li {margin: 0px;}
+    </style>
+    <title>mirye's rule</title>
+</head>
+<body>
+    <h1 class="hide">mirye's rule</h1>
+    <section class="import">
+        <div>
+            <h2>막혔을 때</h2>
+            <p>
+                전제 증명하기<br>
+                희망사항 시도해보기
+            </p>
+        </div>
+        <div>
+            <h2>반응형 할 때</h2>
+            <p>
+                css media 사용<br>
+                js를 사용해야 한다면 최소로 사용<br>
+                (css를 js로 직접 선언하는 것은 지양)
+            </p>
+        </div>
+        <div>
+            <h2>navigation</h2>
+            <p>
+                gnb - 내용이 거의 변하지 않음<br>
+                lnb - gnb 내용에 따라 변함<br>
+                snb - 내용이 거의 변하지 않음
+            </p>
+        </div>
+    </section>
+    <hr>
+    <div class="reference">
+        <h2>css</h2>
+        <section>
+            <h3>attr 이용</h3>
+            <ul>
+                <li>
+                    <h4><em>enabled/disabled</em> 상태 이용가능한 요소</h4>
+                    <dl>
+                        <dt>button, input, seclect, option, textarea</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    button {cursor: pointer;}<br>
+                                    button:disabled {opacity:0.8; cursor: initial;}<br><br>
+                                    (:enabled 는 defult 상태로 따로 선언해서 사용하지는 않지만 선언은 가능<br>
+                                    :disabled 는 기본적인 비활성 디자인이 적용되어 있으며, 비활성 디자인 추가가 필요할 때 사용)
+                                </p>
+                                <div class="example">
+                                    <button type="button">button:enabled</button>
+                                    <button type="button" disabled>button:disabled</button>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4><em>checked</em>  상태 이용가능한 요소 (it also has enabled, disabled)</h4>
+                    <dl>
+                        <dt>input[type="radio"], input[type="checkbox"], option</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    input[type="radio"]:checked {outline: 1px dashed red;}
+                                </p>
+                                <div class="example">
+                                    <label for="enabled">enabled</label>
+                                    <input type="radio" name="radio" id="enabled">
+                                    <label for="checked">checked</label>
+                                    <input type="radio" name="radio" id="checked" checked>
+                                    <label for="disabled">disabled</label>
+                                    <input type="radio" name="radio" id="disabled" disabled>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    [추가필요] :visited [접근을 했었는지 표시], :focus, :hover, :active [mousedown ~ mouseup], :empty [text가 없는 것을 인지], :not(~) [~가 아닐 때 전부]
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>class 이용</h3>
+            <ul>
+                <li>
+                    <h4><em>body</em> layout</h4>
+                    <dl>
+                        <dt>class rule</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    #wrap > #header + #main(#container) + #footer<br>
+                                    #header > #gnb<br>
+                                    #main(#container) > #snb + #contents + #aside<br>
+                                    <br>
+                                    wrap > area > box > group
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4><em>column</em> layout</h4>
+                    <dl>
+                        <dt class="dt_only">css table or flex 속성 사용</dt>
+                        <dd></dd>
+                    </dl>
+                    <dl>
+                        <dt>class rule</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    .col {width: auto;}<br>
+                                    .col_full {width: 100&#37;;}<br>
+                                    .col_half {width: 50&#37;;}<br>
+                                    .col_third {width: 33.3&#37;;}<br>
+                                    .col_quarter {width: 25&#37;;}<br>
+                                    .col_fifth {width: 20&#37;;}<br><br>
+                                    .col &gt; .box {width: 100&#37;;}
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4><em>row</em> layout</h4>
+                    <dl>
+                        <dt>class rule</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    .row {width: 100&#37;;}<br><br>
+                                    .row &gt; .inner_section {width:100%; max-width: 1200px;}<br>
+                                    .row &gt; .outer_section {width: 100%;}<br>
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    [추가필요].box visual 적인거
+                </li>
+                <li>
+                    <h4><em>의미를 가진</em> design</h4>
+                    <dl>
+                        <dt>class rule</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    .(selector)_primary (기본)<br>
+                                    .(selector)_secondary (보조)<br>
+                                    .(selector)_success (성공)<br>
+                                    .(selector)_warning (주의)<br>
+                                    .(selector)_danger (위험)<br>
+                                    .(selector)_info (부가적인)
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4><em>형태를 표현한</em> design</h4>
+                    <dl>
+                        <dt>class rule</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    .(selector)_link<br>
+                                    .(selector)_fill (background)<br>
+                                    .(selector)_solid (line)<br>
+                                    .(selector)_lighten (반전되는 design)<br>
+                                    .(selector)_darken (반전되는 design)
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4><em>etc</em></h4>
+                    <dl>
+                        <dt>class rule</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    .(selector)_start<br>
+                                    .(selector)_end<br>
+                                    .(selector)_begin<br>
+                                    .(selector)_finish<br>
+                                    .(selector)_enter<br>
+                                    .(selector)_exit<br>
+                                    .(selector)_step01<br>
+                                    .(selector)_step02<br>
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>경로표현</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    .path<br>
+                                    .location<br>
+                                    .bread_crumb
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>basic</h3>
+            <ul>
+                <li>
+                    <h4>속성</h4>
+                    <dl>
+                        <dt>선택자</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    type 선택자 = div,p,h1,span등 태그 선택자<br>
+                                    class 선택자 = .class명으로 지정한 선택자<br>
+                                    id 선택자 = #id명으로 지정한 선택자<br>
+                                    후손 선택자 div p = div 의 자식 (모든 p)<br>
+                                    직계 선택자 div > p = div 의 자식 (1대 p)<br>
+                                    인접 선택자 div + p = div 의 형제 p (div 바로 뒤에 오는 형제 p)<br>
+                                    형제 선택자 div ~ = div 다음에 오는 모든 형제 요소<br>
+                                    수열 선택자 div:first-child/nth-child(3)/last-child/last-of-type<br>
+                                    속성 선택자 img[alt] alt속성을 가진 img 요소<br>
+                                    반응 선택자 :hover/checked/focus
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>display</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    inline  |  block  |  flex  |  inline-block  |  inline- flex  |  inline-table  |  list-item  |  run- in  |  tabl  e  |table-caption  |  table-column- group  |  table-header-group  |  table-footer- group  |  table-row-grou  p  |table-cell  |  table- column  |  table-row  |  none
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>animation</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    animation-name: @keyframes 이름 (예시에서는 tutsFade를 사용함)<br>
+                                    animation-duration: 타임프레임 길이. 애니메이션 시작부터 마지막까지 총 지속시간<br>
+                                    animation-timing-function: 애니메이션 속도 조절 ( linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier )<br>
+                                    animation-delay: 애니메이션이 시작하기 전 지연시간<br>
+                                    animation-iteration-count: 반복 횟수<br>
+                                    animation-direction: 루프 (loop) 방향. 정방향으로 반복, 역방향으로 반복, 번갈아가며 반복 등을 설정<br>
+                                    animation-fill-mode: 애니메이션 시작/끝 상태 제어 ( none | forwards | backwards | both )
+                                    
+                                    <div class="example">
+                                        브라우저 성능저하 참고 url<br>
+                                        <a href="https://wit.nts-corp.com/2017/06/05/4571">속성</a>
+                                        <a href="https://wit.nts-corp.com/2017/08/31/4861">reflow와 repaint</a>
+                                    </div>
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>transform</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    준비중
+                                    scale/rotate/transition/perspective/scale, scaleX,Y(0.5) 50%축소/
+                                    skew, skewX,Y(30deg) 30도 기울기
+
+                                    <div class="example">
+                                        transition 참고 url<br>
+                                        <a href="https://developer.mozilla.org/ko/docs/Web/CSS/cssTransitions/Using_csstransitions">속성</a>
+                                    </div>
+                                    
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>table</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    table에 scroll을 적용해야한다면<br>
+                                    table(thead~tfoot) 전체 scroll은 css로 적용이 가능<br>
+                                    <br>
+                                    만약, tbody만 scroll을 적용해야한다면<br>
+                                    <br>
+                                    1. css로 구현해야 할 경우 (접근성 불충족)<br>
+                                    table tag를 2개 사용하여 구현가능<br>
+                                    
+                                    <br>
+                                    2. js로 구현할 경우 (접근성 충족)<br>
+                                    table에서의 모든 table속성을 block으로 바꿔주고, tbody에만 scroll을 적용<br>
+                                    th, td width를 일일히 지정해줘야하고 스크롤이 생기는 시점에 js로 계산하여 width값 재입력<br>
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </section>
+        <hr>
+
+        <h2>html</h2>
+        <section>
+            <h3>mark up 용어</h3>
+            <ul>
+                <li>
+                    <h4>시멘틱 마크업/논리적 마크업</h4>
+                    <dl>
+                        <dt>시멘틱 마크업</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    의미에 맞는 tag를 사용함으로써 tag만 보아도 제목, 내용의 구분이 확실하게 느껴지게 하는 것<br>
+                                    시멘틱 마크업을 하게 되면 음성낭독기로 읽을 때에도 구조에 대한 혼돈이 적어짐
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>논리적 마크업</dt>
+                        <dd>
+                            <div>
+                                <p>사용자가 브라우저를 볼 때 인식하는 논리적 순서에 따라 마크업해야 함</p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4>콘텐츠의 종류</h4>
+                    <dl>
+                        <dt>메타 데이터</dt>
+                        <dd>
+                            <div>
+                                <p>head 태그 안에 포함되는 요소들</p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>플로우</dt>
+                        <dd>
+                            <div>
+                                <p>body 태그 안에 포함되는 대부분의 요소들</p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>프레이징</dt>
+                        <dd>
+                            <div>
+                                <p>text를 markup하는 요소 dt, em 등</p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>임베디드</dt>
+                        <dd>
+                            <div>
+                                <p>다른 리소스 삽입 img, video 등</p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>인터렉티브</dt>
+                        <dd>
+                            <div>
+                                <p>사용자의 상호작용 button, select, a 등</p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>inline / block 속성</h3>
+            <ul>
+                <li>
+                    <h4><em>inline</em> 요소</h4>
+                    <dl>
+                        <dt>button</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    다른 block 요소를 포함할 수 없다
+                                </p>
+                                <div>
+                                    <xmp>
+                                        <button type="button">
+                                            button 입니다
+                                            <span>span 입니다</span> <em>em 입니다</em>
+                                            <div>div 입니다</div>
+                                        </button>
+                                    </xmp>
+                                    <span>아래의 결과는 정상적으로는 보이지만 w3c 체크 시 error뜸 </span><br>
+                                    <div class="example">
+                                        <button type="button" style="border: 1px solid gray;">
+                                            button 입니다
+                                            <span>span 입니다</span> <em>em 입니다</em>
+                                            <div style="border: 1px solid red;">div 입니다</div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>높이와 넓이를 가질 수 없다</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    공간을 가지게 하려면 margin과 padding으로 가능하지만, 다음에 오는 블럭요소에 영향을 끼치진 않는다<br>
+                                    영향력이 있는 높이와 넓이를 가지게 하려면 블럭 속성으로 바꿔야한다
+                                </p>
+                                <div class="example">
+                                    <span style="padding: 5px; border: 1px solid gray;">span {padding: 5px; border: 1px solid gray;}</span> <em style="padding: 10px; border: 1px solid gray;">em {padding: 10px; border: 1px solid gray;}</em>
+                                    <p style="border: 1px solid red;">p {border: 1px solid red;}</p>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4><em>block</em> 요소</h4>
+                    <dl>
+                        <dt>header</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    소개 및 탐색에 도움을 주는 콘텐츠<br>
+                                    제목, 로고, 검색 폼, 작성자 이름 등의 요소로도 사용 가능
+                                </p>
+                                <div class="example">
+                                    페이지 제목: body > header<br>
+                                    글 제목: article > header + p
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>h1 ~ h6, p</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    다른 block 요소를 포함할 수 없다
+                                </p>
+                                <div>
+                                    <xmp>
+                                        <p>
+                                            p 입니다
+                                            <span>span 입니다</span> <em>em 입니다</em>
+                                            <div>div 입니다</div>
+                                        </p>
+                                        <h5>
+                                            p 입니다
+                                            <span>span 입니다</span> <em>em 입니다</em>
+                                            <div>div 입니다</div>
+                                        </h5>
+                                    </xmp>
+                                    <span>아래의 결과를 보면 p의 경우 div가 자동으로 밖으로 나옴</span><br>
+                                    <span>헤딩 tag는 정상적으로는 보이지만 w3c 체크 시 error뜸</span>
+                                    <div class="example">
+                                        <p style="border: 1px solid gray;">
+                                            p 입니다
+                                            <span>span 입니다</span> <em>em 입니다</em>
+                                            <div style="border: 1px solid red;">div 입니다</div>
+                                        </p>
+                                        <h5 style="border: 1px solid gray; font-size: 16px;">
+                                            h5 입니다
+                                            <span>span 입니다</span> <em>em 입니다</em>
+                                            <div style="border: 1px solid red;">div 입니다</div>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>nav</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    gnb, lnb, snb 이외의 navigation
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>section</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    주제별로 그룹화, 헤딩 tag 를 포함
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>article</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    게시물, 기사, 포스팅 등 헤딩 tag 를 포함
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>aside</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    없어도 무방한 내용이지만 메인 콘텐츠와 관련성이 있어야 함
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>ul / ol</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    ul type="disc/circle/square"<br>
+                                    ol type="demical/lowel-alpha/lower-roman" start="10" - 10번째 순번부터 표현<br><br>
+                                    defult : ul, ol {list-style: (defult) outside none;}
+                                </p>
+                                <div class="example">
+                                    <div class="ul">
+                                        <ul style="list-style: circle outside none;">
+                                            <li>ul {list-style: circle outside none;} defult</li>
+                                            <li>ul {list-style: circle outside none;} defult</li>
+                                            <li>ul {list-style: circle outside none;} defult</li>
+                                        </ul>
+                                        <ul style="list-style: disc outside none;">
+                                            <li>ul {list-style: disc outside none;}</li>
+                                            <li>ul {list-style: disc outside none;}</li>
+                                            <li>ul {list-style: disc outside none;}</li>
+                                        </ul>
+                                        <ul style="list-style: square outside none;">
+                                            <li>ul {list-style: square outside none;}</li>
+                                            <li>ul {list-style: square outside none;}</li>
+                                            <li>ul {list-style: square outside none;}</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="ol">
+                                        <ol style="list-style: demical outside none;">
+                                            <li>ol {list-style: demical outside none;} defult</li>
+                                            <li>ol {list-style: demical outside none;} defult</li>
+                                            <li>ol {list-style: demical outside none;} defult</li>
+                                        </ol>
+                                        <ol style="list-style: lower-alpha outside none;">
+                                            <li>ol {list-style: lowel-alpha outside none;}</li>
+                                            <li>ol {list-style: lowel-alpha outside none;}</li>
+                                            <li>lowel-alpha upper-alpha</li>
+                                        </ol>
+                                        <ol style="list-style: lower-roman outside none;">
+                                            <li>ol {list-style: lower-roman outside none;}</li>
+                                            <li>ol {list-style: lower-roman outside none;}</li>
+                                            <li>lower-roman upper-roman</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>table</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    form이 돌아가는 table의 경우<br>
+                                    캡션 내용 적지 않기
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>form / fieldset / legend </dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    form : 데이터를 입력 받고 전송할 때 사용<br>
+                                    fieldset : 여러 컨트롤(input)과 레이블(label)을 묶을때 사용<br>
+                                    legend : fieldset에 대한 설명
+                                </p>
+
+                                <h5>form[method]</h5>
+                                <ul>
+                                    <li>get - 읽을때</li>
+                                    <li>post - 넘버를 새로 쓸때</li>
+                                    <li>patch - 넘버를 일부만 수정할 때</li>
+                                    <li>put - 넘버를 전체 덮어씌울때</li>
+                                    <li>delete - 넘버를 삭제할때</li>
+                                    <li>options - 재확인절차</li>
+                                </ul>
+
+                                <h5>form[action]</h5>
+                                <ul>
+                                    <li>값을 전달할 페이지를 입력</li>
+                                </ul>
+                                <div class="example">
+                                    <xmp>
+                                        <form method="post" action="yyy">
+                                            <fieldset>
+                                                <legend>legend : fieldset에 대한 설명</legend>
+                                                <input type="text" placeholder="fieldset이 영역을 감싸줌">
+                                            </fieldset>
+                                        </form>
+                                    </xmp>
+                                    <form method="post" action="yyy">
+                                        <fieldset>
+                                            <legend>legend : fieldset에 대한 설명</legend>
+                                            <input type="text" placeholder="fieldset이 영역을 감싸줌">
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            
+                                <hr>
+
+                                <h5>폼과 에이작스의 차이</h5>
+                                <ul>
+                                    <li>폼: 페이지 이동 (동기)</li>
+                                    <li>에이작스: 페이지 비이동 (비동기)</li>
+                                </ul>
+                                
+                                
+                                <h5 style="display: inline-block;">form 속성으로 메일 보내기 :</h5>
+                                <span>action="mailto:someone@example.com" method="post"</span>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>input</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    input type=text/passwerd/tel(모바일에서는 숫자패드로 바뀜)/email/checkbox/radio/date/number<br>
+                                    textarea<br>
+                                    input속성 required(submit과함께사용)/value/placeholder/readonly<br>
+                                    button type=submit(required)/reset/menu<br>
+                                    label/input 함께 사용 시 순서는 상황에 따라 다르게 할 수있음 아래는 예제<br>
+                                    label for 값과 input id를 같게 주면 함께 focus됌<br>
+                                    <br>
+                                    optgroup>option<br>
+                                    button[submit(required)/reset/button]<br>
+                                    input [placeholder/readonly]<br>
+                                    video > source[src]<br>
+                                    form action=“board” method=“get”<br>
+
+                                    input 가상 선택자 익스에서는 표현 안됌<br>
+                                    title: 리더기가 읽어줌<br>
+
+                                    ex) email 작성 표현 중<br>
+                                    label[for="email"]<br>
+                                    input[type="text" id="email" title="이메일 아이디"] @ input[type="text" title="이메일 주소"]<br>
+                                    type="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"<br>
+                                    type=“email” mailto
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <h2>접근성</h2>
+        <section>
+            <h3>html</h3>
+            <ul>
+                <li>
+                    <h4>head</h4>
+                    <dl>
+                        <dt>title</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    본문 내용과 겹치는 단어 또는 문장이 사용 되어야함<br>
+                                    path 표현 시 : | (둘 중 하나만 사용하고 1개만 사용)
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>논리적 마크업</dt>
+                        <dd>
+                            <div>
+                                <p>사용자가 브라우저를 볼 때 인식하는 논리적 순서에 따라 마크업해야 함</p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <h4>body</h4>
+                    <dl>
+                        <dt class="dt_only">
+                            <a href="https://happysos.tistory.com/14">w3c 흔한 경고</a>
+                        </dt>
+                        <dd></dd>
+                    </dl>
+                    <dl>
+                        <dt>name / role / value</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    준비중
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>tab index</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    키보드의 논리적인 순서 이동을 위해 사용
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>table</dt>
+                        <dd>
+                            <div>
+                                <p>
+                                    디자인 용도로 사용하면 안됌<br>
+                                    colgroup > col 의 개수 = tr 내의 tag 개수<br>
+                                    caption/summary 둘 중 하나만 적용해도 접근성 품질마크 취득에 문제 없음<br>
+                                    scope=“col/row” 속성(리더기가 읽어주는 방향) 적어야함
+                                    <a href="https://jowook.tistory.com/entry/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1table%EC%9D%98-scopecol%EA%B3%BC-scoperow">table sope 참조</a>
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

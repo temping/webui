@@ -43,15 +43,20 @@
 
         .hide {display: none !important;}
 
-        .import > div {display: inline-block; padding: 0px 20px 10px; vertical-align: top; border-radius: 10px; border: 1px dashed #000;}
+        .import > div {display: inline-block; padding: 10px 20px; vertical-align: top; border-radius: 10px; border: 1px dashed #000;}
+        .import h2 {margin: 5px 0 15px;}
 
-        .reference > h2 {font-size: 28px;}
+        .reference h2 {font-size: 28px;}
 
         .example {margin-top: 15px; padding: 15px 0px 0px 0px; border-top: 1px dashed rgba(0,0,0,0.6);}
         .example .ul ul {display: inline-block; width: 310px; margin: 20px 0px 0px 0px;}
         .example .ul ul > li {margin: 0px;}
         .example .ol ol {display: inline-block; width: 310px; margin: 20px 0px 0px 0px;}
         .example .ol ol > li {margin: 0px;}
+
+        .link_box {display: block;}
+        .link_box div + div {margin: 20px 0 0 0;}
+        .link_box a {display: inline-block; padding: 0 20px;}
     </style>
     <title>mirye's rule</title>
 </head>
@@ -66,14 +71,6 @@
             </p>
         </div>
         <div>
-            <h2>반응형 할 때</h2>
-            <p>
-                css media 사용<br>
-                js를 사용해야 한다면 최소로 사용<br>
-                (css를 js로 직접 선언하는 것은 지양)
-            </p>
-        </div>
-        <div>
             <h2>navigation</h2>
             <p>
                 gnb - 내용이 거의 변하지 않음<br>
@@ -81,6 +78,25 @@
                 snb - 내용이 거의 변하지 않음
             </p>
         </div>
+    </section>
+    <section class="import">
+        <h2>link</h2>
+        <div class="link_box">
+            <div>
+                <span>css</span>
+                <a href="https://heropy.blog/2018/11/24/css-flexible-box/">flex</a>
+                <a href="https://medium.com/watcha/watcha-%EA%B0%9C%EB%B0%9C-%EC%A7%80%EC%8B%9D-px-em-rem-f569c6e76e66">px^em^rem</a>
+                <a href="https://developer.mozilla.org/ko/docs/Web/CSS/cssTransitions/Using_csstransitions">transition</a>
+                <a href="https://jowook.tistory.com/entry/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1table%EC%9D%98-scopecol%EA%B3%BC-scoperow">table sope</a>
+            </div>
+            <div>
+                <span>etc</span>
+                <a href="https://happysos.tistory.com/14">w3c 흔한 경고</a>
+                <a href="https://wit.nts-corp.com/2017/06/05/4571">animation 성능저하</a>
+                <a href="https://wit.nts-corp.com/2017/08/31/4861">reflow와 repaint</a>
+            </div>
+        </div>
+        
     </section>
     <hr>
     <div class="reference">
@@ -185,15 +201,15 @@
                             <div>
                                 <p>
                                     .row {width: 100&#37;;}<br><br>
-                                    .row &gt; .inner_section {width:100%; max-width: 1200px;}<br>
                                     .row &gt; .outer_section {width: 100%;}<br>
+                                    .row &gt; .inner_section {width:100%; max-width: 1200px;}
                                 </p>
                             </div>
                         </dd>
                     </dl>
                 </li>
                 <li>
-                    [추가필요].box visual 적인거
+                    [추가필요].box visual 적인 내용
                 </li>
                 <li>
                     <h4><em>의미를 가진</em> design</h4>
@@ -202,12 +218,12 @@
                         <dd>
                             <div>
                                 <p>
-                                    .(selector)_primary (기본)<br>
-                                    .(selector)_secondary (보조)<br>
-                                    .(selector)_success (성공)<br>
-                                    .(selector)_warning (주의)<br>
-                                    .(selector)_danger (위험)<br>
-                                    .(selector)_info (부가적인)
+                                    .(character)_primary (기본)<br>
+                                    .(character)_secondary (보조)<br>
+                                    .(character)_success (성공)<br>
+                                    .(character)_warning (주의)<br>
+                                    .(character)_danger (위험)<br>
+                                    .(character)_info (부가적인)
                                 </p>
                             </div>
                         </dd>
@@ -220,11 +236,11 @@
                         <dd>
                             <div>
                                 <p>
-                                    .(selector)_link<br>
-                                    .(selector)_fill (background)<br>
-                                    .(selector)_solid (line)<br>
-                                    .(selector)_lighten (반전되는 design)<br>
-                                    .(selector)_darken (반전되는 design)
+                                    .(character)_link<br>
+                                    .(character)_fill (background)<br>
+                                    .(character)_solid (line)<br>
+                                    .(character)_lighten (반전되는 design)<br>
+                                    .(character)_darken (반전되는 design)
                                 </p>
                             </div>
                         </dd>
@@ -237,14 +253,14 @@
                         <dd>
                             <div>
                                 <p>
-                                    .(selector)_start<br>
-                                    .(selector)_end<br>
-                                    .(selector)_begin<br>
-                                    .(selector)_finish<br>
-                                    .(selector)_enter<br>
-                                    .(selector)_exit<br>
-                                    .(selector)_step01<br>
-                                    .(selector)_step02<br>
+                                    .(character)_start<br>
+                                    .(character)_end<br>
+                                    .(character)_begin<br>
+                                    .(character)_finish<br>
+                                    .(character)_enter<br>
+                                    .(character)_exit<br>
+                                    .(character)_step01<br>
+                                    .(character)_step02<br>
                                 </p>
                             </div>
                         </dd>
@@ -310,12 +326,6 @@
                                     animation-iteration-count: 반복 횟수<br>
                                     animation-direction: 루프 (loop) 방향. 정방향으로 반복, 역방향으로 반복, 번갈아가며 반복 등을 설정<br>
                                     animation-fill-mode: 애니메이션 시작/끝 상태 제어 ( none | forwards | backwards | both )
-                                    
-                                    <div class="example">
-                                        브라우저 성능저하 참고 url<br>
-                                        <a href="https://wit.nts-corp.com/2017/06/05/4571">속성</a>
-                                        <a href="https://wit.nts-corp.com/2017/08/31/4861">reflow와 repaint</a>
-                                    </div>
                                 </p>
                             </div>
                         </dd>
@@ -327,13 +337,7 @@
                                 <p>
                                     준비중
                                     scale/rotate/transition/perspective/scale, scaleX,Y(0.5) 50%축소/
-                                    skew, skewX,Y(30deg) 30도 기울기
-
-                                    <div class="example">
-                                        transition 참고 url<br>
-                                        <a href="https://developer.mozilla.org/ko/docs/Web/CSS/cssTransitions/Using_csstransitions">속성</a>
-                                    </div>
-                                    
+                                    skew, skewX,Y(30deg) 30도 기울기                                    
                                 </p>
                             </div>
                         </dd>
@@ -758,12 +762,6 @@
                 <li>
                     <h4>body</h4>
                     <dl>
-                        <dt class="dt_only">
-                            <a href="https://happysos.tistory.com/14">w3c 흔한 경고</a>
-                        </dt>
-                        <dd></dd>
-                    </dl>
-                    <dl>
                         <dt>name / role / value</dt>
                         <dd>
                             <div>
@@ -792,7 +790,6 @@
                                     colgroup > col 의 개수 = tr 내의 tag 개수<br>
                                     caption/summary 둘 중 하나만 적용해도 접근성 품질마크 취득에 문제 없음<br>
                                     scope=“col/row” 속성(리더기가 읽어주는 방향) 적어야함
-                                    <a href="https://jowook.tistory.com/entry/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1table%EC%9D%98-scopecol%EA%B3%BC-scoperow">table sope 참조</a>
                                 </p>
                             </div>
                         </dd>
